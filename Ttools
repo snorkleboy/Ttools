@@ -1,0 +1,25 @@
+#!/bin/bash
+
+echo Ttools-
+if [ $# -eq 0 ]
+
+then
+	for i in {1..3}
+		do
+		    echo
+	done
+	echo Ttools Scripts:
+	echo _________________________ 
+	for file in /home/snorkeboy/bin/ttools*; do
+	  echo ${file##*/}
+	done
+	echo _________________________
+
+	   
+	   
+else
+	/home/snorkeboy/bin/ttools/test2 ${@: -1}
+
+
+fi
+
