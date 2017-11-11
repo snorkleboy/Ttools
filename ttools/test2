@@ -2,7 +2,6 @@
 # My first script
 
 echo Test2 from bin/ttools
-echo
-echo $@
+echo subscript has reiecved/: $@
 echo
 

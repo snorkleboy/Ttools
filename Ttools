@@ -1,6 +1,8 @@
 #!/bin/bash
 
-echo Ttools-
+echo "Ttools-"
+echo
+
 if [ $# -eq 0 ]
 
 then
@@ -10,7 +12,7 @@ then
 	done
 	echo Ttools Scripts:
 	echo _________________________ 
-	for file in /home/snorkeboy/bin/ttools*; do
+	for file in /home/snorkeboy/bin/ttools/*; do
 	  echo ${file##*/}
 	done
 	echo _________________________
@@ -18,8 +20,19 @@ then
 	   
 	   
 else
-	/home/snorkeboy/bin/ttools/test2 ${@: -1}
+
+	#/home/snorkeboy/bin/ttools/test2 ${@:2}
+	
+	  
+	  
+	FILE="$1"
+	if [ -e /home/snorkeboy/bin/ttools/"$FILE" ]
+	then
+	    /home/snorkeboy/bin/ttools/${@:1} ${@:2}
+	else
+	    echo "that file does not exist in /home/snorkeboy/bin/ttools/"
+	fi
+	  		
 
 
 fi
-
