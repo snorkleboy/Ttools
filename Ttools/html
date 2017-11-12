@@ -1,5 +1,5 @@
 #!/bin/bash
-#makes HTML file for you to >> into a new file
+#makes HTML file for you to append("string">>file) into a new file
 
 cat <<- _EOF_
     <html>

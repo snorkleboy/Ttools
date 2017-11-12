@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# this uses multi threading to make a call to
+# this uses multi threading to make a call to site.(input like 'google.com')
 require 'net/http'
 require 'socket'
 require 'nokogiri' # gem install nokogiri
