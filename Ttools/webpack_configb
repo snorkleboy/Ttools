@@ -1,0 +1,95 @@
+#!/bin/bash
+#outputs standard AA webpack config. pass in -i to run(!) npm instal --save... 
+
+
+npminstall(){
+echo `npm install --save webpack react react-dom babel-core babel-loader babel-preset-es2015 babel-preset-react`
+}
+
+webpackconfig(){
+	echo "'
+			var path = require('path');
+
+		module.exports = {
+
+
+			  context: __dirname,
+			  entry: ENTRYFILE
+			  output: {
+			    path: path.resolve(__dirname),
+			    filename: "'bundle.js'"
+			  },
+			  module: {
+			    loaders: [
+				 {
+				   test: [/\.jsx?$/, /\.js?$/],
+				   exclude: /(node_modules)/,
+				   loader: 'babel-loader',
+				   query: {
+					presets: ['es2015', 'react']
+				   }
+				 }
+			    ]
+			  },
+			  devtool: 'source-map',
+			  resolve: {
+			    extensions: ["'.js'", "'.jsx'", "'*'"]
+			  }
+			};
+		'"
+	echo "'
+			var path = require('path');
+
+		module.exports = {
+
+
+			  context: __dirname,
+			  entry: ENTRYFILE
+			  output: {
+			    path: path.resolve(__dirname),
+			    filename: "'bundle.js'"
+			  },
+			  module: {
+			    loaders: [
+				 {
+				   test: [/\.jsx?$/, /\.js?$/],
+				   exclude: /(node_modules)/,
+				   loader: 'babel-loader',
+				   query: {
+					presets: ['es2015', 'react']
+				   }
+				 }
+			    ]
+			  },
+			  devtool: 'source-map',
+			  resolve: {
+			    extensions: ["'.js'", "'.jsx'", "'*'"]
+			  }
+			};
+		'" `>> ./webpack.config.js`
+}
+
+
+#if flag
+if [ "$1" == "-i" ];
+then	
+	echo "about to make config file and run the following command:"
+	echo
+	echo "npm install --save webpack react react-dom babel-core babel-loader babel-preset-es2015 babel-preset-react"
+	echo
+
+for((i=0;i<=5;i+=1))
+do
+    	echo	'...'
+	echo `sleep 1s`
+done
+
+
+	webpackconfig & npminstall 
+	wait
+
+#if no flag
+else
+	webpackconfig
+fi
+

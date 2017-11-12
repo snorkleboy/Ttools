@@ -2,12 +2,13 @@
 #CLI for Ttools 
 
 
-echo "Ttools-"
-echo
+
 
 if [ $# -eq 0 ]
 
 then
+echo "Ttools-"
+echo
 	for i in {1..3}
 		do
 		    echo

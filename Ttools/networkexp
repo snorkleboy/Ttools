@@ -10,7 +10,6 @@ puts "start"
 uri = URI("http://www." + ARGV[0].to_s )
 
 b = Thread.new{
-  puts "here"
   i=0
   while (true)
     dots=  (i.odd?) ? "..." : ".."
