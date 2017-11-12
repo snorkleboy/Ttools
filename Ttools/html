@@ -1,5 +1,5 @@
 #!/bin/bash
-#description: A script to produce an HTML file
+#makes HTML file for you to >> into a new file
 
 cat <<- _EOF_
     <html>

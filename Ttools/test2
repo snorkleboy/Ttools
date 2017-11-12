@@ -1,7 +1,6 @@
 #!/bin/bash
-# My first script
-
-echo Test2 from bin/ttools
-echo subscript has recieved $@
+# description
+echo
+echo Test2 from bin/ttools has recieved $@
 echo
 

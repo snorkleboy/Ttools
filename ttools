@@ -1,5 +1,5 @@
 #!/bin/bash
-#description: CLI for Ttools 
+#CLI for Ttools 
 
 
 echo "Ttools-"
@@ -16,7 +16,7 @@ then
 	echo _________________________ 
 	for file in $HOME/bin/Ttools/*; do
 
-	  echo  ${file##*/}  `grep "description" $HOME/bin/Ttools/${file##*/}`
+	  echo  ${file##*/} - - - `grep -m2 "#" $HOME/bin/Ttools/${file##*/} | tail -n1`
 	done
 	echo _________________________
 
