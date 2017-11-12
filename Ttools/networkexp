@@ -10,6 +10,7 @@ puts "start"
 uri = URI("http://www." + ARGV[0].to_s )
 
 b = Thread.new{
+  puts "here"
   i=0
   while (true)
     dots=  (i.odd?) ? "..." : ".."
@@ -21,21 +22,15 @@ b = Thread.new{
 
 }
 a = Thread.new{
-  # sleep(2)
-  # res = Net::HTTP.get_response(uri)
-  #
-  # puts res.body if res.is_a?(Net::HTTPSuccess)
-  # if res.message == "OK"
-  #   res.body.scan(/<img /) { |x| puts x }
-  # end
-  uri = URI('http://example.com/some_path?query=string')
+  sleep(2)
+  res = Net::HTTP.get_response(uri)
 
-  Net::HTTP.start(uri.host, uri.port) do |http|
-    request = Net::HTTP::Get.new uri
-
-    response = http.request request # Net::HTTPResponse object
+  puts res.body if res.is_a?(Net::HTTPSuccess)
+  if res.message == "OK"
+    res.body.scan(/<img /) { |x| puts x }
   end
-  doc = Nokogiri::HTML( res )
+
+  doc = Nokogiri::HTML( res.body )
   puts img_srcs = doc.css('img').map{ |i| i['src'] } # Array of strings
 
 }
