@@ -2,6 +2,6 @@
 # My first script
 
 echo Test2 from bin/ttools
-echo subscript has reiecved/: $@
+echo subscript has recieved $@
 echo
 

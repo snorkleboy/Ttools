@@ -1,0 +1,37 @@
+#!/bin/bash
+#description: CLI for Ttools 
+
+
+echo "Ttools-"
+echo
+
+if [ $# -eq 0 ]
+
+then
+	for i in {1..3}
+		do
+		    echo
+	done
+	echo Ttools Scripts:
+	echo _________________________ 
+	for file in $HOME/bin/Ttools/*; do
+
+	  echo  ${file##*/}  `grep "description" $HOME/bin/Ttools/${file##*/}`
+	done
+	echo _________________________
+
+	   
+	   
+else
+	  
+	FILE="$1"
+	if [ -e "$HOME"/bin/Ttools/"$FILE" ]
+	then
+	    $HOME/bin/Ttools/${FILE} ${@:2}
+	else
+	    echo "that file does not exist in $HOME/bin/ttools/"
+	fi
+	  		
+
+
+fi
