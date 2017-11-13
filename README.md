@@ -4,7 +4,7 @@ The most adanced CLI unreleased to date. Leaves almost all functionality to the 
 So lightweight and flexible its almost like you didnt even have it installed. 
 
 ## install
-run Ttools.sh and it will copy all files and folders in its directory to $HOME/bin. It doesnt set permissions. You can also do it manually of course, ttools reads scripts from Ttools folder so copy at least both to the bin folder.
+run Ttools.sh and it will copy all files and folders in its directory to $HOME/bin. You can also do it manually of course, ttools reads scripts from Ttools folder so copy at least both to the bin folder. It doesnt set permissions, to do so use chmod 755 filename or whatever you prefer.
 
 ## use
 "ttools" in the console will bring up a menu by reading filenames from $HOME/bin/Ttools, It also reads the second line as a description
