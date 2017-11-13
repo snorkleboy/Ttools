@@ -14,7 +14,7 @@ passing arguments after ttools, such as "ttools html" will make ttools run the a
 It passes all arguments after the first along to the subscripts, so "ttools webpackconfig -i" will run  webpackconfig in $HOME/bin/Ttools and pass "-i" as an argument.
 
 ## notes
-I will most likely add scripts I like to the master branch and make a barebones branch for other people.
+I will most likely add scripts I like to the master branch and make a barebones branch for people who want to use just the ttools part.
 
 will add a deverboser which will scan a file for console.logs, p's, and puts and delete that line. I may make it save the line and line number into a file and give you a deverbose which appends them back. 
 
