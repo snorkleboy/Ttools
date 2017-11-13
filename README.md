@@ -11,7 +11,7 @@ run Ttools.sh and it will copy all files and folders in its directory to $HOME/b
 
 passing arguments after ttools, such as "ttools html" will make ttools run the assoiated file in the Ttools folder. 
 
-It passes all arguments after the first along to the subscripts, so "Ttools webpackconfig -i" will run  webpackconfig in $HOME/bin/Ttools and pass "-i" as an argument.
+It passes all arguments after the first along to the subscripts, so "ttools webpackconfig -i" will run  webpackconfig in $HOME/bin/Ttools and pass "-i" as an argument.
 
 ## notes
 I will most likely add scripts I like to the master branch and make a barebones branch for other people.
