@@ -1,14 +1,13 @@
 #!/usr/bin/env ruby
-# this uses multi threading to make a call to site.(input like 'google.com')
+# Gets HTTP response body filtered for <a> tags href's. Automatically adds on "http://"\n give it a -r flag for the raw body,\n -f flag for a filename to print to(input like 'networkexp www.facebook.com -r -f filename.txt ').
 require 'net/http'
 require 'socket'
-require 'nokogiri' # gem install nokogiri
 
-puts "start"
-# params = { url:limit => 10, :page => 3 }
-#   uri.query = URI.encode_www_form(params)
-uri = URI("http://www." + ARGV[0].to_s )
 
+
+uri = URI("http://" + ARGV[0].to_s )
+linkFilter = ARGV.include?('-r') ? false : true
+writeToFile = ARGV.include?('-f') ? true : false
 b = Thread.new{
   i=0
   while (true)
@@ -20,18 +19,59 @@ b = Thread.new{
 
 
 }
-a = Thread.new{
-  sleep(2)
-  res = Net::HTTP.get_response(uri)
+def fetch(uri_in, limit = 10)
+  # You should choose a better exception.
+  raise ArgumentError, 'too many HTTP redirects' if limit == 0
 
-  puts res.body if res.is_a?(Net::HTTPSuccess)
-  if res.message == "OK"
-    res.body.scan(/<img /) { |x| puts x }
+  response = Net::HTTP.get_response(URI(uri_in))
+  case response
+  when Net::HTTPSuccess then
+    response.body
+  when Net::HTTPRedirection then
+    location = response['location']
+    warn "redirected to #{location}"
+    fetch(location, limit - 1)
+  else
+    return false
   end
+end
+def print(output)
+      open(ARGV.last, 'w') do |f|
+        output.each do |entry|
+          f.puts(entry)
+        end
+      end
+end
 
-  doc = Nokogiri::HTML( res.body )
-  puts img_srcs = doc.css('img').map{ |i| i['src'] } # Array of strings
-
+a = Thread.new{
+  res = fetch(uri)
+  ans = ''
+  if (a)
+    if (linkFilter)
+      matches = []
+      res.scan(/(<a)([^>]*)>/) {|match| matches.push(match)}
+      # matches.each{|entry| p entry}
+      links = []
+      matches.each{|match| match.each{|entry| links.push(entry.scan(/http[^\"]*/))}}
+      links = links.flatten.map{|link| link.scan(/http[^\"]*/)}
+      ans = links
+    else
+      ans = res
+    end
+  else
+    ans = 'ERROR:couldnt connect'
+  end
+  if (writeToFile)
+    print(ans)
+  else
+    p ans
+  end
 }
 a.join
 b.kill
+
+#  grep -a -E -o "(<a)([^<,>]*)>" test.txt >. test.txt will filter out anchor tags into a file called test.txt
+#  grep -a -E -o "href=.*>" test.txt to pull out hrefs 
+#  or grep -a -E -o "http[^\"]*" test.txt to pull out http
+#  all together
+#  networkexp google.com | grep -a -o -E "(<a)([^<,>]*)(>)" | grep -a -E -o "http[^\"]*"" >> googlelinks.txt
